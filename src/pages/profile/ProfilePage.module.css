@@ -23,14 +23,106 @@
 }
 
 .characterImg {
-  width: 200px;
+  width: 350px;
   height: auto;
   image-rendering: pixelated;
   position: absolute;
-  top: 45%;
+  top: 55%;
   left: 45%;
   transform: translate(-50%, -50%);
   z-index: 10;
+}
+
+/* Badges Area (Top Left) */
+.badgesBox {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  background-color: #fbf6ec;
+  /* Beige */
+  border: 4px solid #3d2f25;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  z-index: 20;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.badgesTitle {
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  background-color: #3d2f25;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.2rem;
+  border: 2px solid #3d2f25;
+}
+
+.badgeSlot {
+  width: 50px;
+  height: 50px;
+  border: 2px dashed #a89f91;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'DungGeunMo', sans-serif;
+  color: #a89f91;
+  font-size: 1.5rem;
+  background-color: white;
+}
+
+.badgeFilled {
+  border: 2px solid #3d2f25;
+  border-radius: 8px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #8bb3e8;
+  /* Baby blue for "STILL A BABY" */
+}
+
+.badgeFilled img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Back Button (Bottom Left) */
+.backButton {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #90caf9;
+  border: 3px solid #1A202C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s;
+}
+
+.backButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.backIcon {
+  font-size: 1.5rem;
+  color: #1A202C;
+  font-weight: bold;
 }
 
 /* Profile Card on the right */
@@ -43,13 +135,14 @@
 }
 
 .profileCard {
-  width: 90%;
-  max-width: 500px;
-  height: 80%;
-  background-color: #fbf6ec; /* Beige */
+  width: 95%;
+  max-width: 650px;
+  height: 85%;
+  background-color: #e5d9bd;
+  /* Darker Beige */
   border: 4px solid #1A202C;
-  border-radius: 20px;
-  padding: 40px;
+  border-radius: 12px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -65,78 +158,125 @@
 
 .idText {
   font-family: 'DungGeunMo', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #1A202C;
 }
 
 .nameText {
   font-family: 'DungGeunMo', sans-serif;
-  font-size: 2.8rem;
+  font-size: 3.5rem;
   font-weight: bold;
-  color: #1A202C;
+  color: #d32f2f;
+  /* Red */
   margin: 0;
 }
 
 .wavyDivider {
   width: 100%;
-  height: 6px;
-  background-image: radial-gradient(circle at 5px 5px, #7c6a5d 3px, transparent 3px);
-  background-size: 10px 10px;
-  opacity: 0.8;
-  margin-bottom: 40px;
+  height: 10px;
+  object-fit: fill;
+  image-rendering: pixelated;
+  margin-bottom: 35px;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 35px;
 }
 
 .infoRow {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 40px;
+  gap: 10px;
+}
+
+.bulletPoint {
+  color: #4a3e35;
+  font-size: 1.1rem;
 }
 
 .infoLabel {
   font-family: 'DungGeunMo', sans-serif;
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.4rem;
   color: #1A202C;
+  font-weight: bold;
 }
 
 .infoValue {
   font-family: 'DungGeunMo', sans-serif;
-  font-size: 1.2rem;
-  color: #4a3e35;
+  font-size: 1.4rem;
+  color: #1A202C;
 }
 
 .badgeContainer {
   display: flex;
   align-items: center;
-  background-color: #4a3e35;
-  border-radius: 20px;
-  padding: 5px 15px;
-  gap: 10px;
+  background-color: #2b619d;
+  border-radius: 8px;
+  padding: 5px 12px;
+  gap: 8px;
   border: 2px solid #1A202C;
 }
 
-.badgeIcon {
-  width: 24px;
-  height: 24px;
-  background-color: #e6f2fa;
-  border-radius: 50%;
-  border: 2px solid #1A202C;
+.badgeIconSmall {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.badgeIcon img {
-  width: 16px;
-  height: 16px;
+.badgeIconSmall img {
+  width: 14px;
+  height: 14px;
   object-fit: contain;
 }
 
 .badgeText {
   font-family: 'DungGeunMo', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   color: white;
-  font-weight: bold;
+}
+
+/* 3 Cats Row */
+.catAnglesRow {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  margin-bottom: 35px;
+  height: 160px;
+}
+
+.catAngleImg {
+  height: 140px;
+  width: auto;
+  image-rendering: pixelated;
+}
+
+/* Logout Button */
+.logoutButton {
+  width: 100%;
+  background-color: #3d2f25;
+  color: white;
+  border: 2px solid #1A202C;
+  border-radius: 8px;
+  padding: 20px 0;
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  transition: background-color 0.1s;
+}
+
+.logoutButton:active {
+  background-color: #2b211a;
 }
