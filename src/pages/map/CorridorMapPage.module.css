@@ -1,126 +1,602 @@
-.corridorContainer {
+.mapContainer {
   width: 100%;
   height: 100vh;
-  background: #34495e; /* Deep blue-grey background */
   position: relative;
+  background-color: #7ab34d;
+  /* Base green for campus */
   overflow: hidden;
   cursor: crosshair;
 }
 
-.floor {
+/* 1. Top Icons */
+.topIcons {
   position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60%;
-  background: #7f8c8d; /* Concrete grey floor */
-  background-image: 
-    linear-gradient(#95a5a6 2px, transparent 2px),
-    linear-gradient(90deg, #95a5a6 2px, transparent 2px);
-  background-size: 80px 80px;
-  box-shadow: inset 0 20px 40px rgba(0,0,0,0.3);
-}
-
-.walls {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 40%;
-  background: #2c3e50;
-  border-bottom: 8px solid #1a252f;
-}
-
-.header {
-  position: absolute;
-  top: 30px;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-size: 1.2rem;
-  text-shadow: 3px 3px 0px black;
-  z-index: 10;
-}
-
-.roomContainer {
-  position: absolute;
-  top: 20%;
-  width: 100%;
+  top: 25px;
+  left: 25px;
   display: flex;
-  justify-content: space-around;
-  padding: 0 50px;
+  gap: 20px;
+  z-index: 100;
 }
 
-.roomDoor {
+.iconWrapper {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 4px solid #1A202C;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.iconWrapper:hover {
+  transform: scale(1.05);
+}
+
+/* Background Colors from Mockup */
+.blue {
+  background-color: #BBE2FF;
+}
+
+.purple {
+  background-color: #F3BFFF;
+}
+
+.orange {
+  background-color: #FFDBBB;
+}
+
+.chatIconBox {
+  position: relative;
+  width: 75%;
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chatIcon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.typingDots {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 3px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  background-color: #1A202C;
+  border-radius: 50%;
+}
+
+.notifBadge,
+.checkBadge {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid #1A202C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+}
+
+.notifBadge {
+  background-color: #DC1B1B;
+}
+
+.checkBadge {
+  background-color: #2ECC71;
+}
+
+.notifText,
+.checkText {
+  color: white;
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* 2. Quest Area */
+.questArea {
+  position: absolute;
+  top: 20px;
+  left: 150px;
+  display: flex;
+  gap: 20px;
+  z-index: 100;
+}
+
+.questCard {
+  background: #fffef2;
+  border: 3px solid #000;
+  border-radius: 20px;
+  padding: 15px;
+  width: 240px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
 }
 
-.doorPanel {
-  width: 60px;
-  height: 100px;
-  background: #95a5a6;
-  border: 4px solid #000;
+.questTitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.questId {
+  font-size: 0.7rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.badgeRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.locationBadge,
+.locationBadgeTeam,
+.timeBadge {
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  border: 1px solid #000;
+}
+
+.locationBadge {
+  background: #ffebeb;
+}
+
+.locationBadgeTeam {
+  background: #e3f2fd;
+}
+
+.timeBadge {
+  background: #fffde7;
+}
+
+.questDesc {
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  min-height: 50px;
+}
+
+.statusButtonPending,
+.statusButtonDone {
+  align-self: flex-end;
+  padding: 5px 15px;
+  border-radius: 10px;
+  border: 2px solid #000;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.statusButtonPending {
+  background: #ffcc80;
+}
+
+.statusButtonDone {
+  background: #c8e6c9;
+}
+
+/* 3. Main Map */
+.mapPlaceholder {
+  width: 100%;
+  height: 100%;
   position: relative;
-  box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
 }
 
-.doorPanel::after {
-  content: '';
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  background: #f1c40f;
-  border: 2px solid black;
-}
-
-.roomDoor span {
-  color: #fff;
-  font-size: 0.6rem;
-  text-shadow: 1px 1px 0px black;
-}
-
-/* Character Sprite */
+/* Character */
 .character {
   position: absolute;
-  width: 32px;
-  height: 48px;
-  z-index: 50;
-  transition: left 0.8s ease-out, top 0.8s ease-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  pointer-events: none;
+  width: 80px;
+  height: 80px;
+
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+
+  z-index: 10;
+
+  image-rendering: pixelated;
+
+  /* 추가 */
+  transition:
+    left 0.35s ease,
+    top 0.35s ease,
+    transform 0.2s ease;
 }
 
 .charHead {
-  width: 24px;
-  height: 24px;
-  background: #f1c40f;
-  border: 3px solid black;
-  box-shadow: inset -4px -4px 0px rgba(0,0,0,0.1);
+  width: 50px;
+  height: 50px;
+  background: white;
+  border: 3px solid #000;
+  border-radius: 15px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.catEars {
+  position: absolute;
+  top: -10px;
+  width: 100%;
+  height: 15px;
+}
+
+.catEars::before,
+.catEars::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: white;
+  border: 3px solid #000;
+  border-bottom: none;
+}
+
+.catEars::before {
+  left: 2px;
+  transform: rotate(-10deg);
+}
+
+.catEars::after {
+  right: 2px;
+  transform: rotate(10deg);
 }
 
 .charBody {
-  width: 28px;
-  height: 24px;
-  background: var(--pixel-primary); /* Gachon Blue shirt */
-  border: 3px solid black;
-  border-top: none;
-  box-shadow: inset -4px -4px 0px rgba(0,0,0,0.2);
+  width: 40px;
+  height: 30px;
+  background: #555;
+  border: 3px solid #000;
+  border-radius: 10px;
+  margin: -5px auto 0;
 }
 
-.instruction {
+.floatingArrow {
   position: absolute;
-  bottom: 100px;
-  width: 100%;
-  text-align: center;
-  opacity: 0.5;
+  z-index: 40;
+  pointer-events: none;
 }
 
-.instruction span {
-  font-size: 0.5rem;
+.arrowImg {
+  width: 100px;
+  /* Adjusted size to match mockup */
+  height: auto;
+  image-rendering: pixelated;
+}
+
+/* 4. Profile Card */
+.profileArea {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.profileCard {
+  background: white;
+  border: 4px solid #000;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  padding: 5px 25px 5px 5px;
+  gap: 15px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.avatarCircle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid #fcaf17;
+  overflow: hidden;
+  background: #eee;
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.studentId {
+  background: #fcaf17;
   color: white;
+  font-size: 0.7rem;
+  padding: 2px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  width: fit-content;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nickname {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #000;
+}
+
+.pointBox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff9c4;
+  padding: 2px 10px;
+  border-radius: 15px;
+  border: 1px solid #fcaf17;
+}
+
+.coin {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.pointValue {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #d35400;
+}
+
+/* Quest Modal Styles */
+.questOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  pointer-events: auto;
+}
+
+.questModal {
+  position: absolute;
+  top: 110px; /* 아이콘 아래 적당한 간격 */
+  left: 25px;
+  width: 800px;
+  height: 500px;
+  background: #FEFCEF;
+  border: 4px solid #1A202C;
+  border-radius: 30px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: modalSlideDown 0.3s ease-out;
+}
+
+@keyframes modalSlideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modalLeftPane {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border-right: 4px solid #1A202C;
+}
+
+.modalTitle {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  color: #1A202C;
+}
+
+.questList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.questListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+  border-bottom: 2px dashed #D1C0A3;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.questListItem:hover {
+  background: rgba(209, 192, 163, 0.1);
+}
+
+.activeQuestItem {
+  background: rgba(209, 192, 163, 0.2);
+  border-left: 6px solid #7C634D;
+  padding-left: 14px !important;
+}
+
+.questInfo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.questIdText {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.1rem;
+  color: #7C634D;
+}
+
+.playIcon {
+  color: #7C634D;
+  font-size: 0.9rem;
+}
+
+.statusTag {
+  padding: 6px 15px;
+  border: 2px solid #1A202C;
+  border-radius: 10px;
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Status Colors */
+.statusTag.검수중 { background: #FFB347; color: #1A202C; }
+.statusTag.진행중 { background: #FDFCF0; color: #7C634D; border-color: #7C634D; }
+.statusTag.완료 { background: #2ECC71; color: white; }
+
+.modalRightPane {
+  width: 380px;
+  background: #7C634D;
+  padding: 30px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detailTitle {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.6rem;
+  margin-bottom: 5px;
+}
+
+.detailId {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.1rem;
+  color: #D1C0A3;
+  margin-bottom: 10px;
+}
+
+.detailBadges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.detailBadge {
+  background: transparent;
+  border: 2px solid #D1C0A3;
+  border-radius: 10px;
+  padding: 4px 15px;
+  font-size: 0.9rem;
+  color: #D1C0A3;
+}
+
+.dividerWavy {
+  width: 100%;
+  height: 4px;
+  background-image: radial-gradient(circle at 4px 4px, #D1C0A3 2px, transparent 2px);
+  background-size: 8px 8px;
+  opacity: 0.6;
+}
+
+.detailDescription {
+  flex: 1;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.playIconSmall {
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+.detailActionArea {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.detailButton {
+  background: #FFB347;
+  border: 2px solid #1A202C;
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.detailButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* 5. Mini Map */
+.miniMapArea {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.miniMapBox {
+  width: 250px;
+  height: 180px;
+  background: #ddd;
+  border: 4px solid #000;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.miniMapImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.miniMapMarker {
+  position: absolute;
+  top: 30%;
+  right: 20%;
+  font-size: 1.5rem;
 }
