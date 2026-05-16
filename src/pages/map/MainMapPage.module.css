@@ -20,17 +20,39 @@
 
 .iconWrapper {
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
+  border: 4px solid #1A202C;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.iconWrapper:hover {
+  transform: scale(1.05);
+}
+
+/* Background Colors from Mockup */
+.blue {
+  background-color: #BBE2FF;
+}
+
+.purple {
+  background-color: #F3BFFF;
+}
+
+.orange {
+  background-color: #FFDBBB;
 }
 
 .chatIconBox {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 75%;
+  height: 75%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,30 +81,38 @@
   border-radius: 50%;
 }
 
-.notifBadge, .checkBadge {
+.notifBadge,
+.checkBadge {
   position: absolute;
-  top: -5px;
+  bottom: -5px;
   right: -5px;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 3px solid #1A202C;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 5;
 }
 
-.notifBadge { background-color: #DC1B1B; }
-.checkBadge { background-color: #4CAF50; }
+.notifBadge {
+  background-color: #DC1B1B;
+}
 
-.notifText, .checkText {
+.checkBadge {
+  background-color: #2ECC71;
+}
+
+.notifText,
+.checkText {
   color: white;
   font-family: 'DungGeunMo', sans-serif;
   font-size: 20px;
   font-weight: bold;
   line-height: 1;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* 2. Quest Area */
@@ -179,17 +209,30 @@
   width: 100%;
   height: 100%;
   position: relative;
-  /* background-image: url('...'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
 }
 
 /* Character */
 .character {
   position: absolute;
-  width: 60px;
+  width: 80px;
   height: 80px;
-  transition: all 0.5s ease-out;
-  transform: translate(-50%, -100%);
-  z-index: 50;
+
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+
+  z-index: 10;
+
+  image-rendering: pixelated;
+
+  /* 추가 */
+  transition:
+    left 0.35s ease,
+    top 0.35s ease,
+    transform 0.2s ease;
 }
 
 .charHead {
@@ -241,21 +284,15 @@
 
 .floatingArrow {
   position: absolute;
-  font-size: 2rem;
-  animation: bounce 1s infinite;
   z-index: 40;
+  pointer-events: none;
 }
 
-@keyframes bounce {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
+.arrowImg {
+  width: 100px;
+  /* Adjusted size to match mockup */
+  height: auto;
+  image-rendering: pixelated;
 }
 
 /* 4. Profile Card */
@@ -331,13 +368,205 @@
 }
 
 .coin {
-  font-size: 0.9rem;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  image-rendering: pixelated;
 }
 
 .pointValue {
   font-size: 1rem;
   font-weight: bold;
   color: #d35400;
+}
+
+/* Quest Modal Styles */
+.questOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  pointer-events: auto;
+}
+
+.questModal {
+  position: absolute;
+  top: 110px; /* 아이콘 아래 적당한 간격 */
+  left: 25px;
+  width: 800px;
+  height: 500px;
+  background: #FEFCEF;
+  border: 4px solid #1A202C;
+  border-radius: 30px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: modalSlideDown 0.3s ease-out;
+}
+
+@keyframes modalSlideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modalLeftPane {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border-right: 4px solid #1A202C;
+}
+
+.modalTitle {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  color: #1A202C;
+}
+
+.questList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.questListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+  border-bottom: 2px dashed #D1C0A3;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.questListItem:hover {
+  background: rgba(209, 192, 163, 0.1);
+}
+
+.activeQuestItem {
+  background: rgba(209, 192, 163, 0.2);
+  border-left: 6px solid #7C634D;
+  padding-left: 14px !important;
+}
+
+.questInfo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.questIdText {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.1rem;
+  color: #7C634D;
+}
+
+.playIcon {
+  color: #7C634D;
+  font-size: 0.9rem;
+}
+
+.statusTag {
+  padding: 6px 15px;
+  border: 2px solid #1A202C;
+  border-radius: 10px;
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Status Colors */
+.statusTag.검수중 { background: #FFB347; color: #1A202C; }
+.statusTag.진행중 { background: #FDFCF0; color: #7C634D; border-color: #7C634D; }
+.statusTag.완료 { background: #2ECC71; color: white; }
+
+.modalRightPane {
+  width: 380px;
+  background: #7C634D;
+  padding: 30px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detailTitle {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.6rem;
+  margin-bottom: 5px;
+}
+
+.detailId {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.1rem;
+  color: #D1C0A3;
+  margin-bottom: 10px;
+}
+
+.detailBadges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.detailBadge {
+  background: transparent;
+  border: 2px solid #D1C0A3;
+  border-radius: 10px;
+  padding: 4px 15px;
+  font-size: 0.9rem;
+  color: #D1C0A3;
+}
+
+.dividerWavy {
+  width: 100%;
+  height: 4px;
+  background-image: radial-gradient(circle at 4px 4px, #D1C0A3 2px, transparent 2px);
+  background-size: 8px 8px;
+  opacity: 0.6;
+}
+
+.detailDescription {
+  flex: 1;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.playIconSmall {
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+.detailActionArea {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.detailButton {
+  background: #FFB347;
+  border: 2px solid #1A202C;
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.detailButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* 5. Mini Map */

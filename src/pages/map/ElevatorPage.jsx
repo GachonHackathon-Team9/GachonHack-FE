@@ -4,44 +4,33 @@ import styles from './ElevatorPage.module.css';
 
 const ElevatorPage = () => {
   const navigate = useNavigate();
-  const floors = ['R', '5', '4', '3', '2', '1', 'B1'];
+
+  const handleFloorClick = (floor) => {
+    if (floor === 'PH') {
+      navigate('/map');
+    } else {
+      navigate('/corridor');
+    }
+  };
 
   return (
     <div className={styles.elevatorContainer}>
       <div className={styles.elevatorPanel}>
-        {/* Display */}
-        <div className={styles.display}>
-          <span className={styles.floorNumber}>1</span>
-          <div className={styles.statusIcons}>
-            <div className={styles.upArrow}>▲</div>
+        <h1 className={`${styles.panelTitle} pixel-text`}>ELEVATOR</h1>
+        <div className={styles.buttonGrid}>
+          <button className={styles.floorButton} onClick={() => handleFloorClick('5F')}>5F</button>
+          <button className={styles.floorButton} onClick={() => handleFloorClick('4F')}>4F</button>
+          <button className={styles.floorButton} onClick={() => handleFloorClick('3F')}>3F</button>
+          <button className={styles.floorButton} onClick={() => handleFloorClick('2F')}>2F</button>
+          <button className={styles.floorButton} onClick={() => handleFloorClick('1F')}>1F</button>
+          <button className={`${styles.floorButton} ${styles.phButton}`} onClick={() => handleFloorClick('PH')}>PH</button>
+        </div>
+        <div className={styles.elevatorStatus}>
+          <div className={styles.statusDisplay}>
+            <span className={styles.currentFloor}>PH</span>
+            <span className={styles.direction}>▲</span>
           </div>
         </div>
-
-        {/* Buttons Grid */}
-        <div className={styles.buttonGrid}>
-          {floors.map((floor) => (
-            <button 
-              key={floor} 
-              className={styles.elevatorButton}
-              onClick={() => {
-                if (floor === '1') navigate('/map');
-                else navigate('/corridor');
-              }}
-            >
-              <span className="pixel-text">{floor}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Control Buttons */}
-        <div className={styles.controlGroup}>
-          <button className={styles.controlButton}>◄||►</button>
-          <button className={styles.controlButton}>►||◄</button>
-        </div>
-      </div>
-
-      <div className={styles.backButton} onClick={() => navigate('/map')}>
-        <span className="pixel-text">BACK TO MAP</span>
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ const CorridorMapPage = () => {
       </div>
 
       {/* Character Sprite */}
-      <div 
+      <div
         className={styles.character}
         style={{ left: `${charPos.x}%`, top: `${charPos.y}%` }}
       >

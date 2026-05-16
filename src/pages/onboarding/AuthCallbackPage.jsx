@@ -9,19 +9,40 @@ const AuthCallbackPage = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const token = params.get('token');
+    const code = params.get('code');
+    const tokenFromUrl = params.get('token');
 
-    if (token) {
-      // 토큰 저장 (localStorage 및 Store)
+    const handleLogin = async (token) => {
       localStorage.setItem('accessToken', token);
-      
-      // 임시 사용자 데이터로 로그인 처리
       login({ token });
-
-      // 첫 가입인지 확인하는 로직이 필요할 수 있으나, 우선 정보 입력 페이지로 이동
       navigate('/register');
+    };
+
+    if (tokenFromUrl) {
+      // 1. URL에 토큰이 직접 들어있는 경우 (이미 교환된 경우)
+      handleLogin(tokenFromUrl);
+    } else if (code) {
+      // 2. URL에 code만 있는 경우 -> 백엔드에 토큰 교환 요청
+      const exchangeCodeForToken = async () => {
+        try {
+          const response = await fetch(`https://gachonhack-be.onrender.com/login/kakao?code=${code}`);
+          const data = await response.json();
+          
+          if (data.token) {
+            handleLogin(data.token);
+          } else {
+            console.error('Failed to get token from backend');
+            navigate('/login');
+          }
+        } catch (error) {
+          console.error('Error during token exchange:', error);
+          navigate('/login');
+        }
+      };
+      
+      exchangeCodeForToken();
     } else {
-      console.error('No token found in callback URL');
+      console.error('No code or token found in callback URL');
       navigate('/login');
     }
   }, [location, navigate, login]);
