@@ -7,7 +7,7 @@ const SplashPage = () => {
   const navigate = useNavigate();
 
   const handleStart = () => {
-    navigate('/map');
+    navigate('/register');
   };
 
   return (
