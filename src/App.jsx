@@ -11,6 +11,7 @@ import AuthCallbackPage from './pages/onboarding/AuthCallbackPage';
 import RegisterPage from './pages/onboarding/RegisterPage';
 
 import Layout from './components/common/Layout/Layout';
+import ProtectedRoute from './components/common/ProtectedRoute';
 
 import QuestListPage from './pages/quests/QuestListPage';
 import ShopPage from './pages/shop/ShopPage';
@@ -29,15 +30,15 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/oauth2/redirect" element={<AuthCallbackPage />} />
 
-        {/* Main App Routes with Layout */}
-        <Route path="/map" element={<Layout><MainMapPage /></Layout>} />
-        <Route path="/elevator" element={<Layout><ElevatorPage /></Layout>} />
-        <Route path="/corridor" element={<Layout><CorridorMapPage /></Layout>} />
-        <Route path="/room" element={<Layout><RoomSpacePage /></Layout>} />
-        <Route path="/quests" element={<Layout><QuestListPage /></Layout>} />
-        <Route path="/shop" element={<Layout><ShopPage /></Layout>} />
-        <Route path="/community" element={<Layout><CommunityPage /></Layout>} />
-        <Route path="/profile" element={<Layout><ProfilePage /></Layout>} />
+        {/* Main App Routes with Layout - 로그인 필요 */}
+        <Route path="/map" element={<ProtectedRoute><Layout><MainMapPage /></Layout></ProtectedRoute>} />
+        <Route path="/elevator" element={<ProtectedRoute><Layout><ElevatorPage /></Layout></ProtectedRoute>} />
+        <Route path="/corridor" element={<ProtectedRoute><Layout><CorridorMapPage /></Layout></ProtectedRoute>} />
+        <Route path="/room" element={<ProtectedRoute><Layout><RoomSpacePage /></Layout></ProtectedRoute>} />
+        <Route path="/quests" element={<ProtectedRoute><Layout><QuestListPage /></Layout></ProtectedRoute>} />
+        <Route path="/shop" element={<ProtectedRoute><Layout><ShopPage /></Layout></ProtectedRoute>} />
+        <Route path="/community" element={<ProtectedRoute><Layout><CommunityPage /></Layout></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><Layout><ProfilePage /></Layout></ProtectedRoute>} />
       </Routes>
     </Router>
   );
