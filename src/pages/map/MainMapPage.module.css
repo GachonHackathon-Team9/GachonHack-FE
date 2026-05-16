@@ -1,0 +1,373 @@
+.mapContainer {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: #7ab34d;
+  /* Base green for campus */
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+/* 1. Top Icons */
+.topIcons {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  display: flex;
+  gap: 20px;
+  z-index: 100;
+}
+
+.iconWrapper {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chatIconBox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chatIcon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.typingDots {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 3px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  background-color: #1A202C;
+  border-radius: 50%;
+}
+
+.notifBadge, .checkBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid #1A202C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.notifBadge { background-color: #DC1B1B; }
+.checkBadge { background-color: #4CAF50; }
+
+.notifText, .checkText {
+  color: white;
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+}
+
+/* 2. Quest Area */
+.questArea {
+  position: absolute;
+  top: 20px;
+  left: 150px;
+  display: flex;
+  gap: 20px;
+  z-index: 100;
+}
+
+.questCard {
+  background: #fffef2;
+  border: 3px solid #000;
+  border-radius: 20px;
+  padding: 15px;
+  width: 240px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.questTitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.questId {
+  font-size: 0.7rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.badgeRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.locationBadge,
+.locationBadgeTeam,
+.timeBadge {
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  border: 1px solid #000;
+}
+
+.locationBadge {
+  background: #ffebeb;
+}
+
+.locationBadgeTeam {
+  background: #e3f2fd;
+}
+
+.timeBadge {
+  background: #fffde7;
+}
+
+.questDesc {
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  min-height: 50px;
+}
+
+.statusButtonPending,
+.statusButtonDone {
+  align-self: flex-end;
+  padding: 5px 15px;
+  border-radius: 10px;
+  border: 2px solid #000;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.statusButtonPending {
+  background: #ffcc80;
+}
+
+.statusButtonDone {
+  background: #c8e6c9;
+}
+
+/* 3. Main Map */
+.mapPlaceholder {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  /* background-image: url('...'); */
+}
+
+/* Character */
+.character {
+  position: absolute;
+  width: 60px;
+  height: 80px;
+  transition: all 0.5s ease-out;
+  transform: translate(-50%, -100%);
+  z-index: 50;
+}
+
+.charHead {
+  width: 50px;
+  height: 50px;
+  background: white;
+  border: 3px solid #000;
+  border-radius: 15px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.catEars {
+  position: absolute;
+  top: -10px;
+  width: 100%;
+  height: 15px;
+}
+
+.catEars::before,
+.catEars::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: white;
+  border: 3px solid #000;
+  border-bottom: none;
+}
+
+.catEars::before {
+  left: 2px;
+  transform: rotate(-10deg);
+}
+
+.catEars::after {
+  right: 2px;
+  transform: rotate(10deg);
+}
+
+.charBody {
+  width: 40px;
+  height: 30px;
+  background: #555;
+  border: 3px solid #000;
+  border-radius: 10px;
+  margin: -5px auto 0;
+}
+
+.floatingArrow {
+  position: absolute;
+  font-size: 2rem;
+  animation: bounce 1s infinite;
+  z-index: 40;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* 4. Profile Card */
+.profileArea {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.profileCard {
+  background: white;
+  border: 4px solid #000;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  padding: 5px 25px 5px 5px;
+  gap: 15px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.avatarCircle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid #fcaf17;
+  overflow: hidden;
+  background: #eee;
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.studentId {
+  background: #fcaf17;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  width: fit-content;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nickname {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #000;
+}
+
+.pointBox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff9c4;
+  padding: 2px 10px;
+  border-radius: 15px;
+  border: 1px solid #fcaf17;
+}
+
+.coin {
+  font-size: 0.9rem;
+}
+
+.pointValue {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #d35400;
+}
+
+/* 5. Mini Map */
+.miniMapArea {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.miniMapBox {
+  width: 250px;
+  height: 180px;
+  background: #ddd;
+  border: 4px solid #000;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.miniMapImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.miniMapMarker {
+  position: absolute;
+  top: 30%;
+  right: 20%;
+  font-size: 1.5rem;
+}

@@ -1,0 +1,105 @@
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background-color: #014F9E;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.logoBox {
+  background: white;
+  padding: 10px 15px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.universityLogo {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.elevatorSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  /* Push to bottom of center area */
+  padding-bottom: 60px;
+}
+
+.elevatorTitle {
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  text-align: center;
+  letter-spacing: 2px;
+  border-bottom: 4px solid white;
+  padding-bottom: 5px;
+  width: 180px;
+}
+
+.floorContainer {
+  background: transparent;
+  padding: 10px;
+  border: 4px solid white;
+  border-radius: 25px;
+  width: 200px;
+}
+
+.floorInnerBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.floorButton {
+  background: white;
+  border: none;
+  border-radius: 15px;
+  padding: 15px 0;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #014F9E;
+  cursor: pointer;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.floorButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
+}
+
+.floorButton:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.activePH {
+  color: #DC1B1B !important;
+  /* PH specific red color */
+  border: 4px solid #DC1B1B !important;
+}
+
+.activeFloor {
+  border: 4px solid #014F9E;
+}

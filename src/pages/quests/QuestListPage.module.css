@@ -1,0 +1,228 @@
+.questContainer {
+  padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  color: white;
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  background-image: 
+    linear-gradient(rgba(1, 79, 158, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(1, 79, 158, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 4px solid #000;
+  box-shadow: 8px 8px 0px rgba(0,0,0,0.5);
+}
+
+.titleArea h1 {
+  color: var(--pixel-secondary);
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.titleArea p {
+  font-size: 0.6rem;
+  color: #bdc3c7;
+}
+
+.pointWidget {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #000;
+  padding: 10px 20px;
+  border: 2px solid var(--pixel-secondary);
+}
+
+.pointInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.pointLabel {
+  font-size: 0.5rem;
+  color: #95a5a6;
+}
+
+.pointValue {
+  font-size: 1.2rem;
+  color: var(--pixel-secondary);
+}
+
+/* Tabs */
+.tabContainer {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #333;
+  border: 4px solid #000;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #95a5a6;
+}
+
+.tab.active {
+  background: var(--pixel-primary);
+  color: white;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 0px #000;
+}
+
+.tab span {
+  font-size: 0.8rem;
+}
+
+/* Quest Grid */
+.questGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.questCard {
+  background: #2c3e50;
+  border: 4px solid #000;
+  padding: 20px;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.questCard:hover {
+  transform: scale(1.02);
+}
+
+.questTier {
+  font-size: 0.5rem;
+  color: var(--pixel-secondary);
+  margin-bottom: 8px;
+}
+
+.questCard h3 {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.questCard p {
+  font-size: 0.8rem;
+  color: #bdc3c7;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.questFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.reward {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reward span {
+  font-size: 0.7rem;
+  color: var(--pixel-secondary);
+}
+
+/* Status variants */
+.completed {
+  opacity: 0.7;
+  border-color: #2ecc71;
+}
+
+.completed h3 {
+  text-decoration: line-through;
+  color: #2ecc71;
+}
+
+.in-progress {
+  border-color: var(--pixel-secondary);
+  box-shadow: 0 0 15px rgba(252, 175, 23, 0.2);
+}
+
+.locked {
+  filter: grayscale(1);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Title Grid */
+.titleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.titleCard {
+  background: #34495e;
+  border: 4px solid #000;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.titleCard h3 {
+  font-size: 0.8rem;
+  color: white;
+}
+
+.titleCard p {
+  font-size: 0.7rem;
+  color: #bdc3c7;
+}
+
+.priceTag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.buyButton {
+  width: 100%;
+  background: var(--pixel-secondary);
+  border: 3px solid #000;
+  color: #000;
+  padding: 8px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.buyButton:hover {
+  background: #e67e22;
+}
+
+.owned {
+  border-color: var(--pixel-secondary);
+  background: rgba(252, 175, 23, 0.05);
+}
+
+.ownedLabel {
+  color: var(--pixel-secondary);
+  font-size: 0.7rem;
+}

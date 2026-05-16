@@ -1,0 +1,74 @@
+@font-face {
+  font-family: 'NeoDunggeunmo';
+  src: url('/neodgm.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.loginContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/assets/campus_bg.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.loginBox {
+  background: white;
+  padding: 100px 40px 60px;
+  /* Increased top padding to 100px */
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  /* Slightly increased gap for better breathing room */
+}
+
+.logoArea {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.universityLogo {
+  width: 280px;
+  max-width: 100%;
+  height: auto;
+}
+
+.kakaoButton {
+  width: 100%;
+  background-color: #014F9E;
+  border: none;
+  padding: 18px 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kakaoButton:hover {
+  background-color: #013d7a;
+}
+
+
+.kakaoButton span {
+  color: white;
+  font-family: 'NeoDunggeunmo', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: -1px;
+  line-height: 1;
+
+  -webkit-font-smoothing: none;
+  text-rendering: pixelated;
+}
