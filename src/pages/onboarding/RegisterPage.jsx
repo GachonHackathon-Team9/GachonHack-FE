@@ -8,23 +8,24 @@ import bgImage from '../../assets/bg_image.png';
 const RegisterPage = () => {
   const navigate = useNavigate();
   const { user, updateProfile } = useAuthStore();
-  const [portalId, setPortalId] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [studentId, setStudentId] = useState('');
+  const [grade, setGrade] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!portalId || !password) {
+    if (!name || !studentId || !grade) {
       alert('모든 정보를 입력해 주세요!');
       return;
     }
 
     // In a real app, you'd send this to the backend to authenticate with the school portal
-    updateProfile({ portalId }); 
+    updateProfile({ name, studentId, grade });
     navigate('/map');
   };
 
   return (
-    <div 
+    <div
       className={styles.registerContainer}
       style={{ backgroundImage: `url(${bgImage})` }}
     >
@@ -35,29 +36,43 @@ const RegisterPage = () => {
 
         <form onSubmit={handleSubmit} className={styles.formArea}>
           <div className={styles.inputGroup}>
-            <label className={styles.inputLabel}>ID</label>
-            <input 
+            <label className={styles.inputLabel}>본명</label>
+            <input
               type="text"
               className={styles.inputField}
-              value={portalId}
-              onChange={(e) => setPortalId(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="홍길동"
             />
           </div>
           <div className={styles.inputGroup}>
-            <label className={styles.inputLabel}>Password</label>
-            <input 
-              type="password"
+            <label className={styles.inputLabel}>학번</label>
+            <input
+              type="text"
               className={styles.inputField}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={studentId}
+              onChange={(e) => setStudentId(e.target.value)}
+              placeholder="202412345"
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label className={styles.inputLabel}>학년</label>
+            <input
+              type="number"
+              className={styles.inputField}
+              value={grade}
+              onChange={(e) => setGrade(e.target.value)}
+              placeholder="1"
+              min="1"
+              max="4"
             />
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className={styles.submitButton}
           >
-            <span>로그인 하기</span>
+            <span>기본 정보 입력</span>
           </button>
         </form>
       </div>
