@@ -7,7 +7,7 @@ import bgImage from '../../assets/bg_image.png';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const { user, updateProfile } = useAuthStore();
+  const { user, updateProfile, login, isAuthenticated } = useAuthStore();
   const [name, setName] = useState('');
   const [studentId, setStudentId] = useState('');
   const [grade, setGrade] = useState('');
@@ -17,6 +17,11 @@ const RegisterPage = () => {
     if (!name || !studentId || !grade) {
       alert('모든 정보를 입력해 주세요!');
       return;
+    }
+
+    // 테스트를 위해 인증 안 된 상태면 가짜 토큰으로 로그인 처리
+    if (!isAuthenticated) {
+      login({ token: 'test-bypass-token' });
     }
 
     // In a real app, you'd send this to the backend to authenticate with the school portal

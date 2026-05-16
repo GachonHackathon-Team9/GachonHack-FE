@@ -15,9 +15,9 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 
 import QuestListPage from './pages/quests/QuestListPage';
 import ShopPage from './pages/shop/ShopPage';
+import RoomSpacePage from './pages/room/RoomSpacePage';
 
 // Placeholder components for routes not yet implemented
-const RoomSpacePage = () => <div className="container pixel-text">Room</div>;
 const CommunityPage = () => <div className="container pixel-text">Community</div>;
 const ProfilePage = () => <div className="container pixel-text">Profile</div>;
 

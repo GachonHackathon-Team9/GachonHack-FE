@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './CorridorMapPage.module.css';
-import mapImage from '../../assets/map.png';
+import mapImage from '../../assets/corridor_map.jpg';
 import chatImage from '../../assets/talk.png';
-import bgImage from '../../assets/bg_image.png';
+import bgImage from '../../assets/corridor_map_bg.png';
 import coinImage from '../../assets/coin.png';
 import image from '../../assets/cats/black_cat/image.png';
 
 // 고양이 캐릭터 이미지 import
 import catCharacter from '../../assets/cats/calico_cat/calico_cat_front.png';
+import TimetableModal from '../../components/map/TimetableModal';
 
 const CorridorMapPage = () => {
   const navigate = useNavigate();
   const [charPos, setCharPos] = useState({ x: 48, y: 38 });
   const [activeQuestType, setActiveQuestType] = useState(null); // 'daily', 'team', or null
   const [selectedQuestIndex, setSelectedQuestIndex] = useState(0);
+  const [isTimetableOpen, setIsTimetableOpen] = useState(false);
 
   const handleMapClick = (e) => {
     // 모달이 열려있을 때는 캐릭터 이동 방지
-    if (activeQuestType) return;
+    if (activeQuestType || isTimetableOpen) return;
 
     const mapRect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - mapRect.left) / mapRect.width) * 100;
@@ -62,7 +64,7 @@ const CorridorMapPage = () => {
       {/* 1. Top Floating Icons */}
       <div className={styles.topIcons}>
         {/* 1st: Blue with Alert -> Daily Quests */}
-        <div 
+        <div
           className={`${styles.iconWrapper} ${styles.blue}`}
           onClick={(e) => { e.stopPropagation(); handleIconClick('daily'); }}
         >
@@ -80,7 +82,7 @@ const CorridorMapPage = () => {
         </div>
 
         {/* 2nd: Purple with Check -> Team Quests */}
-        <div 
+        <div
           className={`${styles.iconWrapper} ${styles.purple}`}
           onClick={(e) => { e.stopPropagation(); handleIconClick('team'); }}
         >
@@ -109,8 +111,8 @@ const CorridorMapPage = () => {
               </h2>
               <div className={styles.questList}>
                 {currentQuests.map((quest, index) => (
-                  <div 
-                    key={quest.id} 
+                  <div
+                    key={quest.id}
                     className={`${styles.questListItem} ${selectedQuestIndex === index ? styles.activeQuestItem : ''}`}
                     onClick={() => handleQuestClick(index)}
                   >
@@ -134,7 +136,7 @@ const CorridorMapPage = () => {
                 <span className={styles.detailBadge}>{selectedQuest?.location}</span>
                 <span className={styles.detailBadge}>{selectedQuest?.time}</span>
               </div>
-              
+
               <div className={styles.dividerWavy}></div>
 
               <div className={styles.detailDescription}>
@@ -157,6 +159,37 @@ const CorridorMapPage = () => {
         className={styles.mapPlaceholder}
         style={{ backgroundImage: `url(${bgImage})` }}
       >
+        {/* 강의실 입장 버튼들 */}
+        {[
+          { id: 1, top: '55%', left: '73%' },
+        ].map((entrance) => (
+          <div
+            key={entrance.id}
+            className={styles.entranceMarker}
+            style={{ top: entrance.top, left: entrance.left }}
+          >
+            <div className={styles.clickLabel}>
+              <div className={styles.verticalClick}>
+                <span>c</span>
+                <span>l</span>
+                <span>i</span>
+                <span>c</span>
+                <span>k</span>
+              </div>
+              <span className={styles.clickArrows}>»</span>
+            </div>
+            <button
+              className={styles.entranceButton}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsTimetableOpen(true);
+              }}
+            >
+              강의실<br />입장
+            </button>
+          </div>
+        ))}
+
         {/* 캐릭터 이미지 */}
         <img
           src={catCharacter}
@@ -195,6 +228,11 @@ const CorridorMapPage = () => {
           <div className={styles.miniMapMarker}>📍</div>
         </div>
       </div>
+
+      {/* Timetable Modal */}
+      {isTimetableOpen && (
+        <TimetableModal onClose={() => setIsTimetableOpen(false)} />
+      )}
     </div>
   );
 };
