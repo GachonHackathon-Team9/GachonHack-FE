@@ -19,8 +19,23 @@ const useAuthStore = create((set) => ({
   }),
 
   logout: () => {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (refreshToken) {
+      fetch('https://gachonhack-be.onrender.com/api/auth/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refreshToken }),
+      }).catch(() => {});
+    }
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     set({ user: null, isAuthenticated: false });
+  },
+
+  updateTokens: (accessToken, refreshToken) => {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    set((state) => ({ user: { ...state.user, token: accessToken } }));
   },
 
   updateProfile: (profileData) => set((state) => ({

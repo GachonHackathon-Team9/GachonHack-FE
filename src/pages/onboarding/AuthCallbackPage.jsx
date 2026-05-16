@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAuthStore from '../../store/useAuthStore';
+import { fetchWithAuth } from '../../lib/api';
 
 const AuthCallbackPage = () => {
   const navigate = useNavigate();
@@ -11,42 +12,43 @@ const AuthCallbackPage = () => {
     const params = new URLSearchParams(location.search);
     const code = params.get('code');
     const tokenFromUrl = params.get('token');
+    const refreshTokenFromUrl = params.get('refreshToken');
 
-    const handleLogin = async (token) => {
+    const redirectByUserStatus = async (token) => {
+      try {
+        const response = await fetchWithAuth('/api/users/me');
+
+        if (!response.ok) throw new Error(`Failed to fetch user info: ${response.status}`);
+
+        const { isSuccess, result } = await response.json();
+
+        if (!isSuccess) throw new Error('Failed to fetch user info');
+
+        if (result?.nickname) {
+          // 기존 회원: 유저 정보 store에 반영 후 홈으로
+          login({ token, ...result });
+          navigate('/map');
+        } else {
+          // 신규 회원: 토큰만 store에 저장 후 온보딩으로
+          login({ token });
+          navigate('/register');
+        }
+      } catch (error) {
+        console.error('Failed to fetch user info:', error);
+        navigate('/login');
+      }
+    };
+
+    const handleLogin = async (token, refreshToken) => {
       localStorage.setItem('accessToken', token);
-      login({ token });
-      navigate('/register');
+      if (refreshToken) localStorage.setItem('refreshToken', refreshToken);
+      await redirectByUserStatus(token);
     };
 
     if (tokenFromUrl) {
-      // 1. URL에 토큰이 직접 들어있는 경우 (이미 교환된 경우)
-      handleLogin(tokenFromUrl);
-    } else if (code) {
-      // 2. URL에 code만 있는 경우 -> 백엔드에 토큰 교환 요청
-      const exchangeCodeForToken = async () => {
-        try {
-          const response = await fetch(`https://gachonhack-be.onrender.com/login/kakao?code=${code}`);
-          const data = await response.json();
-          
-          if (data.token) {
-            handleLogin(data.token);
-          } else {
-            console.error('Failed to get token from backend:', data);
-            // 임시 UI 테스트를 위해 에러가 나도 /register로 넘어갑니다
-            alert('백엔드 토큰 교환 실패. (UI 테스트를 위해 강제로 넘어갑니다)');
-            navigate('/register');
-          }
-        } catch (error) {
-          console.error('Error during token exchange:', error);
-          // 임시 UI 테스트를 위해 에러가 나도 /register로 넘어갑니다
-          alert('백엔드 통신 에러. (UI 테스트를 위해 강제로 넘어갑니다)');
-          navigate('/register');
-        }
-      };
-      
-      exchangeCodeForToken();
+      handleLogin(tokenFromUrl, refreshTokenFromUrl);
     } else {
-      console.error('No code or token found in callback URL');
+      console.error('No token found in callback URL');
       navigate('/login');
     }
   }, [location, navigate, login]);
