@@ -31,12 +31,16 @@ const AuthCallbackPage = () => {
           if (data.token) {
             handleLogin(data.token);
           } else {
-            console.error('Failed to get token from backend');
-            navigate('/login');
+            console.error('Failed to get token from backend:', data);
+            // 임시 UI 테스트를 위해 에러가 나도 /register로 넘어갑니다
+            alert('백엔드 토큰 교환 실패. (UI 테스트를 위해 강제로 넘어갑니다)');
+            navigate('/register');
           }
         } catch (error) {
           console.error('Error during token exchange:', error);
-          navigate('/login');
+          // 임시 UI 테스트를 위해 에러가 나도 /register로 넘어갑니다
+          alert('백엔드 통신 에러. (UI 테스트를 위해 강제로 넘어갑니다)');
+          navigate('/register');
         }
       };
       
