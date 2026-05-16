@@ -20,28 +20,30 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* Middle Elevator Section */}
-      <div className={styles.elevatorSection}>
-        <h2 className={`${styles.elevatorTitle} pixel-text`}>ELEVATOR</h2>
-        <div className={styles.floorContainer}>
-          <div className={styles.floorInnerBox}>
-            <button
-              className={`${styles.floorButton} ${isPH ? styles.activePH : ''}`}
-              onClick={() => navigate('/map')}
-            >
-              PH
-            </button>
-            <button
-              className={`${styles.floorButton} ${is5F ? styles.activeFloor : ''}`}
-              onClick={() => navigate('/corridor')}
-            >
-              5층
-            </button>
-            <button className={styles.floorButton}>4층</button>
-            <button className={styles.floorButton}>3층</button>
+      {/* Middle Elevator Section - 공지사항/꿀팁/게시글 상세 페이지에서는 숨김 */}
+      {(location.pathname !== '/announcements' && location.pathname !== '/class-tips' && !location.pathname.startsWith('/post')) && (
+        <div className={styles.elevatorSection}>
+          <h2 className={`${styles.elevatorTitle} pixel-text`}>ELEVATOR</h2>
+          <div className={styles.floorContainer}>
+            <div className={styles.floorInnerBox}>
+              <button
+                className={`${styles.floorButton} ${isPH ? styles.activePH : ''}`}
+                onClick={() => navigate('/map')}
+              >
+                PH
+              </button>
+              <button
+                className={`${styles.floorButton} ${is5F ? styles.activeFloor : ''}`}
+                onClick={() => navigate('/corridor')}
+              >
+                5층
+              </button>
+              <button className={styles.floorButton}>4층</button>
+              <button className={styles.floorButton}>3층</button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
     </aside>
   );

@@ -16,10 +16,13 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import QuestListPage from './pages/quests/QuestListPage';
 import ShopPage from './pages/shop/ShopPage';
 import RoomSpacePage from './pages/room/RoomSpacePage';
+import AnnouncementsPage from './pages/room/AnnouncementsPage';
+import ClassTipsPage from './pages/room/ClassTipsPage';
+import PostDetailPage from './pages/room/PostDetailPage';
+import ProfilePage from './pages/profile/ProfilePage';
 
 // Placeholder components for routes not yet implemented
 const CommunityPage = () => <div className="container pixel-text">Community</div>;
-const ProfilePage = () => <div className="container pixel-text">Profile</div>;
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
         <Route path="/elevator" element={<ProtectedRoute><Layout><ElevatorPage /></Layout></ProtectedRoute>} />
         <Route path="/corridor" element={<ProtectedRoute><Layout><CorridorMapPage /></Layout></ProtectedRoute>} />
         <Route path="/room" element={<ProtectedRoute><Layout><RoomSpacePage /></Layout></ProtectedRoute>} />
+        <Route path="/announcements" element={<ProtectedRoute><Layout><AnnouncementsPage /></Layout></ProtectedRoute>} />
+        <Route path="/class-tips" element={<ProtectedRoute><Layout><ClassTipsPage /></Layout></ProtectedRoute>} />
+        <Route path="/post/:id" element={<ProtectedRoute><Layout><PostDetailPage /></Layout></ProtectedRoute>} />
         <Route path="/quests" element={<ProtectedRoute><Layout><QuestListPage /></Layout></ProtectedRoute>} />
         <Route path="/shop" element={<ProtectedRoute><Layout><ShopPage /></Layout></ProtectedRoute>} />
         <Route path="/community" element={<ProtectedRoute><Layout><CommunityPage /></Layout></ProtectedRoute>} />

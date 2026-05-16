@@ -171,7 +171,7 @@ const MainMapPage = () => {
 
       {/* 4. Bottom Profile Card */}
       <div className={styles.profileArea}>
-        <div className={styles.profileCard}>
+        <div className={styles.profileCard} onClick={() => navigate('/profile')}>
           <div className={styles.avatarCircle}>
             <img src={image} alt="Avatar" className={styles.avatarImg} />
           </div>

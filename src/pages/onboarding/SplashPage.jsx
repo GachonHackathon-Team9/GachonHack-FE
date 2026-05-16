@@ -7,19 +7,19 @@ const SplashPage = () => {
   const navigate = useNavigate();
 
   const handleStart = () => {
-    navigate('/login');
+    navigate('/map');
   };
 
   return (
     <div className={styles.splashContainer}>
       <div className={styles.content}>
-        <img 
-          src={titleLogo} 
-          alt="먀옹학관" 
-          className={styles.titleLogo} 
+        <img
+          src={titleLogo}
+          alt="먀옹학관"
+          className={styles.titleLogo}
         />
-        
-        <button 
+
+        <button
           className={`${styles.startButton} pixel-text`}
           onClick={handleStart}
         >

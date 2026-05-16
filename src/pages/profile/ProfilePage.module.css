@@ -1,0 +1,142 @@
+.pageContainer {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Character on the left */
+.characterArea {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+
+.characterImg {
+  width: 200px;
+  height: auto;
+  image-rendering: pixelated;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* Profile Card on the right */
+.profileCardArea {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-right: 50px;
+}
+
+.profileCard {
+  width: 90%;
+  max-width: 500px;
+  height: 80%;
+  background-color: #fbf6ec; /* Beige */
+  border: 4px solid #1A202C;
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.idText {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1A202C;
+}
+
+.nameText {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #1A202C;
+  margin: 0;
+}
+
+.wavyDivider {
+  width: 100%;
+  height: 6px;
+  background-image: radial-gradient(circle at 5px 5px, #7c6a5d 3px, transparent 3px);
+  background-size: 10px 10px;
+  opacity: 0.8;
+  margin-bottom: 40px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.infoLabel {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1A202C;
+}
+
+.infoValue {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.2rem;
+  color: #4a3e35;
+}
+
+.badgeContainer {
+  display: flex;
+  align-items: center;
+  background-color: #4a3e35;
+  border-radius: 20px;
+  padding: 5px 15px;
+  gap: 10px;
+  border: 2px solid #1A202C;
+}
+
+.badgeIcon {
+  width: 24px;
+  height: 24px;
+  background-color: #e6f2fa;
+  border-radius: 50%;
+  border: 2px solid #1A202C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.badgeIcon img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.badgeText {
+  font-family: 'DungGeunMo', sans-serif;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: bold;
+}

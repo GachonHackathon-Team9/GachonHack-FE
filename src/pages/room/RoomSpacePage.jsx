@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './RoomSpacePage.module.css';
 import chatImage from '../../assets/talk.png';
 import classroomBg from '../../assets/classroom.png';
@@ -12,18 +13,41 @@ import catCharacter from '../../assets/cats/calico_cat/calico_cat_front.png';
 import honeyIcon from '../../assets/honey.png';
 import gongjiIcon from '../../assets/gongji.png';
 
+import QuestModal from '../../components/map/QuestModal';
+
 const RoomSpacePage = () => {
+  const navigate = useNavigate();
   const [charPos, setCharPos] = useState({ x: 50, y: 80 }); // Default bottom center
   const [isChatOpen, setIsChatOpen] = useState(true);
+  const [activeQuestType, setActiveQuestType] = useState(null); // 'daily', 'team', or null
 
   const handleMapClick = (e) => {
-    // If clicking on chat UI, don't move character
-    if (e.target.closest(`.${styles.chatArea}`)) return;
+    // If clicking on chat UI or modal is open, don't move character
+    if (activeQuestType || e.target.closest(`.${styles.chatArea}`)) return;
     
     const mapRect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - mapRect.left) / mapRect.width) * 100;
     const y = ((e.clientY - mapRect.top) / mapRect.height) * 100;
     setCharPos({ x, y });
+  };
+
+  const handleAnnouncementsClick = (e) => {
+    e.stopPropagation();
+    navigate('/announcements');
+  };
+
+  const handleClassTipsClick = (e) => {
+    e.stopPropagation();
+    navigate('/class-tips');
+  };
+
+  const handleIconClick = (type) => {
+    setActiveQuestType(type);
+  };
+
+  const closeQuestModal = (e) => {
+    if (e) e.stopPropagation();
+    setActiveQuestType(null);
   };
 
   return (
@@ -32,10 +56,20 @@ const RoomSpacePage = () => {
       style={{ backgroundImage: `url(${classroomBg})` }}
       onClick={handleMapClick}
     >
+      {/* Quest Modal */}
+      <QuestModal 
+        isOpen={!!activeQuestType} 
+        initialTab={activeQuestType} 
+        onClose={closeQuestModal} 
+      />
+
       {/* 1. Top Floating Icons (Left) */}
       <div className={styles.topIconsLeft}>
         {/* 1st: Blue with Alert */}
-        <div className={`${styles.iconWrapper} ${styles.blue}`}>
+        <div 
+          className={`${styles.iconWrapper} ${styles.blue}`}
+          onClick={(e) => { e.stopPropagation(); handleIconClick('daily'); }}
+        >
           <div className={styles.chatIconBox}>
             <img src={chatImage} alt="chat" className={styles.chatIcon} />
             <div className={styles.typingDots}>
@@ -50,7 +84,10 @@ const RoomSpacePage = () => {
         </div>
 
         {/* 2nd: Purple with Check */}
-        <div className={`${styles.iconWrapper} ${styles.purple}`}>
+        <div 
+          className={`${styles.iconWrapper} ${styles.purple}`}
+          onClick={(e) => { e.stopPropagation(); handleIconClick('team'); }}
+        >
           <div className={styles.chatIconBox}>
             <img src={chatImage} alt="chat" className={styles.chatIcon} />
             <div className={styles.typingDots}>
@@ -67,13 +104,13 @@ const RoomSpacePage = () => {
 
       {/* 2. Top Floating Icons (Right) */}
       <div className={styles.topIconsRight}>
-        <div className={styles.rightIconItem}>
+        <div className={styles.rightIconItem} onClick={handleClassTipsClick}>
           <div className={styles.circleIcon}>
             <img src={honeyIcon} alt="꿀팁" className={styles.innerIconImg} />
           </div>
           <span className={styles.iconLabel}>강의 꿀팁</span>
         </div>
-        <div className={styles.rightIconItem}>
+        <div className={styles.rightIconItem} onClick={handleAnnouncementsClick}>
           <div className={styles.circleIcon}>
             <img src={gongjiIcon} alt="공지사항" className={styles.innerIconImg} />
           </div>
@@ -94,7 +131,7 @@ const RoomSpacePage = () => {
 
       {/* 4. Bottom Left Profile Card */}
       <div className={styles.profileArea}>
-        <div className={styles.profileCard}>
+        <div className={styles.profileCard} onClick={() => navigate('/profile')}>
           <div className={styles.avatarCircle}>
             <img src={image} alt="Avatar" className={styles.avatarImg} />
           </div>
