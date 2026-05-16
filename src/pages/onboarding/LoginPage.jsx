@@ -4,7 +4,7 @@ import gachonLogo from '../../assets/gachon_logo.png';
 const LoginPage = () => {
   const handleKakaoLogin = () => {
     // Vite 환경 변수에서 카카오 REST API 키를 가져옵니다.
-    const CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID; 
+    const CLIENT_ID = 'a2f3d269be1a5c8b55b6edb55c890612';
     const REDIRECT_URI = `${window.location.origin}/oauth2/redirect`;
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
